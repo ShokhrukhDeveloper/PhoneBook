@@ -4,6 +4,7 @@ namespace PhoneBook.Services
 {
     internal class PhoneBookService
     {
+        public PhoneBookService() { }
         private static PhoneBooks?[] PhoneBooksArray= new PhoneBooks[] { };
         public void CreatePhoneBook() 
         {
@@ -23,28 +24,64 @@ namespace PhoneBook.Services
             return phoneBooks;
         }
         
-        public void UpdatePhoneBook(int index) 
+        public void UpdatePhoneBookBy() 
         {
-            PhoneBooks phoneBooks = InputPhoneBook();
-            int Id = PhoneBooksArray[index].Id;
-            PhoneBooksArray[index]=phoneBooks;
-            PhoneBooksArray[index].Id = Id;
-            Console.WriteLine("Muvifaqqiyatli yangilandi");
+
+            int id = Input("Enter Id:");
+            PhoneBooks? phoneBooks = GetById(id);
+            if (phoneBooks != null)
+            {
+                PhoneBooks newPhoneBooks = InputPhoneBook();
+                int Id = phoneBooks.Id;
+                newPhoneBooks.Id = Id;
+                PhoneBooksArray[Array.IndexOf(PhoneBooksArray, phoneBooks)]=newPhoneBooks;
+                Console.WriteLine("Successufully updated");
+            }
+          
         }
-        public void DeletePhoneBookByIndex(int index) 
+        public void DeletePhoneBookById() 
         {
-            PhoneBooksArray[index]=null;
+            int id=Input("Enter Id:");
+            PhoneBooks? phoneBooks = GetById(id); 
+            if (phoneBooks != null)
+            {
+                PhoneBooksArray[Array.IndexOf(PhoneBooksArray,phoneBooks)] = null;
+                Console.WriteLine("Successfully deleted");
+            }
+
         }
-        public PhoneBooks GetPhoneBookByIndex(int index)
+        public void PrintPhoneBookById()
         {
-           return PhoneBooksArray[index];
+            int id = Input("Enter Id:");
+            PhoneBooks? phoneBooks = PhoneBooksArray.FirstOrDefault(e=>e.Id==id);
+            if (phoneBooks is null)
+            {
+                Console.WriteLine("Berilgan Id bo'yicha ma'lumot toplimadi");
+                return;
+            }
+            Console.WriteLine($"Id: {phoneBooks.Id}; \tName: {phoneBooks.Name}\t Phone: {phoneBooks.Phone}");
         }
-        public PhoneBooks?[] GetAllPhoneBooks(int index)
+        public void PrintAllPhoneBooks()
         {
-            return PhoneBooksArray;
+            foreach (PhoneBooks item in PhoneBooksArray)
+            {
+                if (item != null)
+                {
+                    Console.WriteLine($"Id:{item.Id} \tName: {item.Name}");
+                }
+            }
         }
 
-
+        private int Input(string text)
+        {
+            Console.Write(text);
+            string userInput = Console.ReadLine();
+            return Convert.ToInt32(userInput);
+        }
+        private PhoneBooks? GetById(int id)
+        {
+            return PhoneBooksArray.FirstOrDefault(e => e.Id == id);
+        }
 
     }
 }
