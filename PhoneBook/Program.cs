@@ -1,17 +1,19 @@
 ﻿using PhoneBook.Services;
 
 PhoneBookService PhoneBookService = new PhoneBookService();
-    while(true)
-    {
+bool start = true;
+
+do
+{
     PhoneBookService.PrintAllPhoneBooks();
     Console.WriteLine("-----------------------------------------------");
     ControlMenu();
     int input = Input();
-    if (input==0)
+    if (input == 0)
     {
-        break;
+        start = false;
     }
-    switch(input)
+    switch (input)
     {
         case 1:
             PhoneBookService.CreatePhoneBook();
@@ -32,7 +34,7 @@ PhoneBookService PhoneBookService = new PhoneBookService();
     Console.Clear();
 
 
-}
+} while (start);
 
 void ControlMenu() 
 {

@@ -11,7 +11,6 @@ namespace PhoneBook.Services
             PhoneBooks phoneBooks = InputPhoneBook();
             phoneBooks.Id = PhoneBooksArray.Length;
             PhoneBooksArray.Append(phoneBooks);
-            Console.Clear();
             Console.WriteLine("Muvifaqqiyatli qo'shildi");
         }
         private PhoneBooks InputPhoneBook() 
