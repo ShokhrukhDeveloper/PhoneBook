@@ -34,7 +34,7 @@ do
     Console.Clear();
 
 
-} while (start);
+}while (start);
 
 void ControlMenu() 
 {

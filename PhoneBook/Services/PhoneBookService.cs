@@ -5,7 +5,7 @@ namespace PhoneBook.Services
     internal class PhoneBookService
     {
         public PhoneBookService() { }
-        private static PhoneBooks?[] PhoneBooksArray= new PhoneBooks[] { };
+        private static PhoneBooks?[] PhoneBooksArray= new PhoneBooks[20];
         public void CreatePhoneBook() 
         {
             PhoneBooks phoneBooks = InputPhoneBook();
