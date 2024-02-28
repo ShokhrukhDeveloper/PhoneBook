@@ -1,7 +1,7 @@
 ﻿using PhoneBook.Services;
 
 PhoneBookService PhoneBookService = new PhoneBookService();
-bool start = true;
+bool running = true;
 
 do
 {
@@ -11,7 +11,7 @@ do
     int input = Input();
     if (input == 0)
     {
-        start = false;
+        running = false;
     }
     switch (input)
     {
@@ -34,7 +34,7 @@ do
     Console.Clear();
 
 
-}while (start);
+}while (running);
 
 void ControlMenu() 
 {
