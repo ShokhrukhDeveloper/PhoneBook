@@ -33,7 +33,6 @@ do
     }
     Console.Clear();
 
-
 }while (running);
 
 void ControlMenu() 
