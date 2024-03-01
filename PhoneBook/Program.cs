@@ -7,49 +7,81 @@ bool running = true;
 do
 {
    
-    Console.WriteLine("|-----------------------------------------------|");
+   
     ControlMenu();
-    int userInputNumber= Input("Tanlang");
-
+    int userInputNumber= Input("Quyidagilardan birini  tanlang:");
+    if (userInputNumber == 0 )
+    {
+        running = false;
+        break;
+    }
     
     switch (userInputNumber)
     {
         case 1:
-        System.Console.WriteLine();
-        Console.Write("Nomi: ");
-        string Name=Console.ReadLine();
-        Console.Write("Raqami: ");
-        string Phone=Console.ReadLine();
-        contactService.AddContact(new(Name,Phone));
-        break;
-        case 2:
-        int line =Input("Raqami:");
-        Contact contact = contactService.DeleteContactById(line);
-        Console.WriteLine($"{contact.Name} muovaqqiyatli o'chirildi");
-        break;
-        
-        case 3:
-        var res=contactService.GetAllContacts();
-        foreach (Contact item in res)
-        {
-        Console.WriteLine(item.Name);
-        }
-        break;
-        default:
-        break;
-    }
-    // Console.Clear();
+            Console.Clear();
+            Console.WriteLine("|-----------------------------------------------|");
+            Contact[] res = contactService.GetAllContacts();
+            int i= 0;
+            foreach (Contact item in res)
+            {
+                Console.WriteLine($"{++i}) "+item.Name);
+            }
+            Console.WriteLine("|-----------------------------------------------|");
+            break;
 
+        case 2:
+            
+            Console.WriteLine("Yangi qo'shish tanlandi ");
+            Console.Write("Nomini kiriting: ");
+            string Name=Console.ReadLine();
+            Console.Write("Raqamini kiriting: ");
+            string Phone=Console.ReadLine();
+            Contact contact = contactService.AddContact(new(Name,Phone));
+            Console.Clear();
+            Console.WriteLine($"Nomi: {contact.Name}\t Tel: {contact.Phone} ");
+            Console.WriteLine("Muvoffaqiyatli qo'shildi ");
+            break;
+
+        case 3:
+
+            Console.WriteLine("O'chirish tanlandi");
+            int line =Input("Contact tartib raqami: ");
+            contact = contactService.DeleteContactById(line);
+            Console.WriteLine($"{contact.Name} muovaqqiyatli o'chirildi");
+            break;
+
+        case 4:
+            Console.WriteLine("Contact haqida ma'lumot");
+            line = Input("Tartib raqami:");
+            contact=contactService.GetContactByLine(line);
+            Console.WriteLine();
+            Console.WriteLine($"Nomi: {contact.Name}\t Tel: {contact.Phone}");
+            Console.WriteLine();
+            break;
+
+        case 5:
+            line = Input("Tartib raqami:");
+            Console.Write("Nomi: ");
+            Name = Console.ReadLine();
+            Console.Write("Raqami: ");
+            Phone = Console.ReadLine();
+            contactService.UpdateContactByLine(line,new(Name, Phone));
+            break;
+        default:
+            Console.Clear();
+            Console.WriteLine("Noto'gri tanlov qayrtadan tanlang");
+            break;
+    }
 }while (running);
 
 void ControlMenu() 
 {
-
-    Console.WriteLine("1) Contact list");
-    Console.WriteLine("2) Create Contact");
-    Console.WriteLine("3) Delete Contact");
-    Console.WriteLine("4) Get ContactDetails");
-    Console.WriteLine("5) Update Contact");
+    Console.WriteLine("1) Contactlar ro'yhati");
+    Console.WriteLine("2) Contact yaratish");
+    Console.WriteLine("3) Contact o'chirish");
+    Console.WriteLine("4) Contact ma'lumotlari");
+    Console.WriteLine("5) Contactni yangilash");
     Console.WriteLine("0) Exit");
 }
 int Input(string text)
