@@ -1,10 +1,10 @@
 using PhoneBook.Model;
 namespace PhoneBook.Brokers;
-public partial interface IStorageBroker
+public interface IFileBroker
     {
         Contact InsertContact(Contact contact);
-        List<Contact> GetAllContacts();
-        Contact GetContactById(Guid contactId);
-        Contact UpdateContact(Contact contact);
-        Contact DeleteContact(Contact contact);
+        Contact[] GetAllContacts();
+        Contact GetContactByLine(int line);
+        Contact UpdateContactByLine(int line,Contact contact);
+        Contact DeleteContactByLine(int line);
     }

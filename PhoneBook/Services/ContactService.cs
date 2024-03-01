@@ -2,13 +2,14 @@
 using PhoneBook.Model;
 
 namespace PhoneBook.Services;
-public class ContacService : IContactService
+public class ContactService : IContactService
 {
-    private readonly IStorageBroker storageBroker;
 
-    public ContacService(StorageBroker storageBroker)
+    private readonly IFileBroker storageBroker;
+
+    public ContactService()
     {
-        this.storageBroker = storageBroker;
+        this.storageBroker = new FileBroker("contact.txt");
     }
     public Contact AddContact(Contact contact)
     {
