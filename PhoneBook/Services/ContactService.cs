@@ -18,7 +18,7 @@ public class ContactService : IContactService
 
     public Contact DeleteContactById(int line)
     {
-        throw new NotImplementedException();
+        return storageBroker.DeleteContactByLine(line);
     }
 
     public Contact[] GetAllContacts()
