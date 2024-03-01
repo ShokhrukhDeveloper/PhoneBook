@@ -5,9 +5,7 @@ using PhoneBook.Services;
 bool running = true;
 
 do
-{
-   
-   
+{  
     ControlMenu();
     int userInputNumber= Input("Quyidagilardan birini  tanlang:");
     if (userInputNumber == 0 )
