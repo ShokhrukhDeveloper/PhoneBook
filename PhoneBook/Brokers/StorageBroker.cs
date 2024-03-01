@@ -29,7 +29,7 @@ public class FileBroker : IFileBroker
 
     public Contact InsertContact(Contact contact)
     {
-        File.AppendAllText(fileName,$"{contact.Name}:{contact.Phone}");
+        File.AppendAllText(fileName,$"{contact.Name}:{contact.Phone}"+Environment.NewLine);
         return contact;
     }
 
@@ -42,7 +42,7 @@ public class FileBroker : IFileBroker
     }
     private Contact ToModel(string text)
     {
-        string[] data= text.Split(":");
+        string[] data= text.Split(':');
         return new Contact(data[0],data[1]);
     }
 }

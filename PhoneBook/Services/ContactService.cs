@@ -13,7 +13,7 @@ public class ContactService : IContactService
     }
     public Contact AddContact(Contact contact)
     {
-        throw new NotImplementedException();
+        return storageBroker.InsertContact(contact);
     }
 
     public Contact DeleteContactById(int line)
@@ -23,16 +23,16 @@ public class ContactService : IContactService
 
     public Contact[] GetAllContacts()
     {
-        throw new NotImplementedException();
+        return storageBroker.GetAllContacts();
     }
 
     public Contact GetContactByLine(int line)
     {
-        throw new NotImplementedException();
+        return storageBroker.GetContactByLine(line);
     }
 
     public Contact UpdateContactByLine(int line, Contact contact)
     {
-        throw new NotImplementedException();
+        return storageBroker.UpdateContactByLine(line,contact);
     }
 }
