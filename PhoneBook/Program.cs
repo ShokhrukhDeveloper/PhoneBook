@@ -1,53 +1,60 @@
-﻿using PhoneBook.Services;
+﻿using PhoneBook.Model;
+using PhoneBook.Services;
 
-PhoneBookService PhoneBookService = new PhoneBookService();
+ IContactService contactService= new ContactService();
 bool running = true;
 
 do
 {
-    PhoneBookService.PrintAllPhoneBooks();
-    Console.WriteLine("-----------------------------------------------");
+   
+    Console.WriteLine("|-----------------------------------------------|");
     ControlMenu();
-    int input = Input();
-    if (input == 0)
-    {
-        running = false;
-    }
-    switch (input)
+    int userInputNumber= Input("Tanlang");
+
+    
+    switch (userInputNumber)
     {
         case 1:
-            PhoneBookService.CreatePhoneBook();
-            break;
+        System.Console.WriteLine();
+        Console.Write("Nomi: ");
+        string Name=Console.ReadLine();
+        Console.Write("Raqami: ");
+        string Phone=Console.ReadLine();
+        contactService.AddContact(new(Name,Phone));
+        break;
         case 2:
-            PhoneBookService.DeletePhoneBookById();
-            break;
+        int line =Input("Raqami:");
+        Contact contact = contactService.DeleteContactById(line);
+        Console.WriteLine($"{contact.Name} muovaqqiyatli o'chirildi");
+        break;
+        
         case 3:
-            PhoneBookService.PrintPhoneBookById();
-            break;
-        case 4:
-            PhoneBookService.UpdatePhoneBookBy();
-            break;
+        var res=contactService.GetAllContacts();
+        foreach (Contact item in res)
+        {
+        Console.WriteLine(item.Name);
+        }
+        break;
         default:
-            Console.WriteLine("Nomalum raqam");
-            break;
+        break;
     }
-    Console.Clear();
+    // Console.Clear();
 
 }while (running);
 
 void ControlMenu() 
 {
 
-    Console.WriteLine("1) Create Contact");
-    Console.WriteLine("2) Delete Contact by Id");
-    Console.WriteLine("3) Get Contact by Id");
-    Console.WriteLine("4) Update Contact by Id");
+    Console.WriteLine("1) Contact list");
+    Console.WriteLine("2) Create Contact");
+    Console.WriteLine("3) Delete Contact");
+    Console.WriteLine("4) Get ContactDetails");
+    Console.WriteLine("5) Update Contact");
     Console.WriteLine("0) Exit");
- 
 }
-int Input()
+int Input(string text)
 {
-    Console.Write(" ");
+    Console.Write(text);
     string userInput = Console.ReadLine();
     return Convert.ToInt32(userInput);
 }
